@@ -80,6 +80,10 @@ pre code {
   color: unset;
 }
 
+img {
+  max-width: 100%;
+}
+
 .katex-display {
   overflow-x: auto;
   overflow-y: clip;
