@@ -70,6 +70,46 @@ img {
   max-width: 100%;
 }
 
+figure {
+  text-align: center;
+}
+
+a {
+  color: #379;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+a strong {
+  font-weight: 700;
+}
+
+strong {
+  font-weight: 600;
+}
+
+a.footnote-ref {
+  text-decoration: none;
+}
+
+.footnote-ref sup:before {
+  content: "[";
+}
+
+.footnote-ref sup:after {
+  content: "]";
+}
+
+a.footnote-back {
+  text-decoration: none;
+}
+
+blockquote {
+  border-left: 1px solid #888;
+  margin: 0;
+  padding: 0 0 0 1rem;
+}
+
 .katex-display {
   overflow-x: auto;
   overflow-y: clip;
