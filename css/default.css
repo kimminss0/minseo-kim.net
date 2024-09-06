@@ -54,10 +54,30 @@ article .header {
   text-decoration: none;
 }
 
+.logo a .gray {
+  color: #888;
+  
+}
+
+code {
+  background: #f5f5f5;
+  padding: 2px 4px;
+  border-radius: 3px;
+  color: #444;
+}
+
 pre {
-  background: #fdf6e3;
+  background: #f5f5f5;
   padding: 8px 15px;
+  border-radius: 5px;
   overflow-x: auto;
+}
+
+pre code {
+  background: unset;
+  padding: unset;
+  border-radius: unset;
+  color: unset;
 }
 
 .katex-display {
@@ -86,7 +106,7 @@ pre {
     margin: 0rem auto 1rem;
   }
   .logo a {
-    font-size: 2.4rem;
+    font-size: 2rem;
   }
   nav a {
     display: block;
@@ -115,7 +135,7 @@ pre {
     margin: 0rem auto 1rem;
   }
   .logo a {
-    font-size: 2.4rem;
+    font-size: 2rem;
   }
   nav a {
     display: inline;
