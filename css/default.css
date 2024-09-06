@@ -54,7 +54,7 @@ article .header {
   text-decoration: none;
 }
 
- .sourceCode pre {
+pre {
   background: #fdf6e3;
   padding: 8px 15px;
   overflow-x: auto;
