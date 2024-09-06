@@ -2,15 +2,12 @@
 {-# LANGUAGE OverloadedStrings #-}
 import           Data.Monoid (mappend)
 import           Hakyll
-import Text.Pandoc
 import Text.Pandoc.Options
-import Hakyll.Web.Pandoc
-import qualified Data.Set as S
 
 --------------------------------------------------------------------------------
 main :: IO ()
 main = hakyll $ do
-    match ("images/*" .||. "js/*" .||. "css/fonts/*") $ do
+    match ("images/*" .||. "js/*") $ do
         route   idRoute
         compile copyFileCompiler
 
@@ -28,7 +25,7 @@ main = hakyll $ do
         route $ setExtension "html"
         compile $ pandocCompilerWith readerOpts writerOpts
             >>= loadAndApplyTemplate "templates/post.html"    postCtx
-            >>= loadAndApplyTemplate "templates/default.html" (mathCtx `mappend` postCtx)
+            >>= loadAndApplyTemplate "templates/default.html" postCtx
             >>= relativizeUrls
 
     create ["archive.html"] $ do
@@ -75,13 +72,3 @@ writerOpts :: WriterOptions
 writerOpts = defaultHakyllWriterOptions {
     writerHTMLMathMethod = MathJax ""
 }
-
-mathCtx :: Context a
-mathCtx = field "katex" $ \item -> do
-    katex <- getMetadataField (itemIdentifier item) "katex"
-    return $ case katex of
-                    Just "false" -> ""
-                    Just "off" -> ""
-                    _ -> "<link rel=\"stylesheet\" href=\"/css/katex.min.css\">\n\
-                             \<script type=\"text/javascript\" src=\"/js/katex.min.js\"></script>\n\
-                             \<script src=\"/js/auto-render.min.js\"></script>"
