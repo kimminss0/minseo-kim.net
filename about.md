@@ -28,7 +28,7 @@ katex: on
 되었습니다. $\LaTeX$ 수식은 [KaTeX]의 도움을 받아 렌더링 됩니다. 블로그의
 소스코드를 [GitHub][source-code]에서 확인할 수 있습니다.
 
-[CV]: #
+[CV]: https://github.com/kimminss0/CV
 [Vim]: https://www.vim.org
 [Neovim]: https://neovim.io
 [Haskell]: https://haskell.org
