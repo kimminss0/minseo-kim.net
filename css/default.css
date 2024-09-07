@@ -197,7 +197,10 @@ blockquote {
     display: inline;
   }
   footer {
-    text-align: right;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
   }
   .logo {
     margin: 0;
