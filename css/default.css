@@ -59,6 +59,13 @@ article .header {
   
 }
 
+:not(pre) > code {
+  background: #f5f5f5;
+  padding: 2px 4px;
+  border-radius: 3px;
+  color: #444;
+}
+
 pre {
   background: #f5f5f5;
   padding: 8px 15px;
