@@ -32,7 +32,7 @@ katex: on
 [Vim]: https://www.vim.org
 [Neovim]: https://neovim.io
 [Haskell]: https://haskell.org
-[Hakyll]: https://jaspervdj.be/hakyll/tutorials.html
+[Hakyll]: https://jaspervdj.be/hakyll
 [KaTeX]: https://katex.org
 [source-code]: https://github.com/kimminss0/minseo-kim.net
 
