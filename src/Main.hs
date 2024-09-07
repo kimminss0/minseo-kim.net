@@ -15,15 +15,15 @@ main = hakyll $ do
         route   idRoute
         compile compressCssCompiler
 
-    match (fromList ["about.rst", "contact.markdown"]) $ do
+    match (fromList ["about.md", "contact.md"]) $ do
         route   $ setExtension "html"
-        compile $ pandocCompiler
+        compile $ mathPandocCompiler
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
             >>= relativizeUrls
 
     match "posts/*" $ do
         route $ setExtension "html"
-        compile $ pandocCompilerWith readerOpts writerOpts
+        compile $ mathPandocCompiler
             >>= loadAndApplyTemplate "templates/post.html"    postCtx
             >>= loadAndApplyTemplate "templates/default.html" postCtx
             >>= relativizeUrls
@@ -62,7 +62,7 @@ main = hakyll $ do
 --------------------------------------------------------------------------------
 postCtx :: Context String
 postCtx =
-    dateField "date" "%B %e, %Y" `mappend`
+    dateField "date" "%F" `mappend` -- format defined on Data.Time.Format module
     defaultContext
 
 readerOpts :: ReaderOptions
@@ -72,3 +72,6 @@ writerOpts :: WriterOptions
 writerOpts = defaultHakyllWriterOptions {
     writerHTMLMathMethod = MathJax ""
 }
+
+mathPandocCompiler :: Compiler (Item String)
+mathPandocCompiler = pandocCompilerWith readerOpts writerOpts

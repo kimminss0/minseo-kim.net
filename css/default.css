@@ -115,6 +115,11 @@ blockquote {
   overflow-y: clip;
 }
 
+.home-social-links {
+  display: flex;
+  gap: 0.5rem;
+}
+
 @media (max-width: 319px) {
   body {
     width: 90%;
