@@ -9,11 +9,20 @@ katex: on
 
 제 취향을 소개합니다.
 
-- [Vim]/[Neovim]으로 코딩하기를 좋아해요.
+- [Vim]/[Neovim]으로 코딩하기를 좋아합니다.
 - 가장 좋아하는 언어는 C/C++입니다.
-- 가장 배우고 싶은 언어는 Haskell입니다. 지금도 배워가고 있어요.
+- 가장 배우고 싶은 언어는 Haskell입니다.
 - GNU/Linux보다도 FreeBSD를 선호합니다. ZFS, Jail, 잘 짜인 man 페이지가 마음에
   들어요.
+
+아래는 제 소셜 링크입니다.
+
+<div class="social-links"> <a href="https://github.com/kimminss0"> <img
+    src="/images/github.svg" alt="GitHub" /> </a> <a
+        href="https://www.linkedin.com/in/minseo-kim-639304298/"> <img
+            src="/images/linkedin.svg" alt="Linkedin" /> </a> <a
+        href="https://www.instagram.com/kimminss0"> <img
+            src="/images/instagram.svg" alt="Instagram" /> </a> </div>
 
 이 블로그는 [Haskell]로 작성된 static website generator인 [Hakyll]로 컴파일
 되었습니다. $\LaTeX$ 수식은 [KaTeX]의 도움을 받아 렌더링 됩니다. 블로그의

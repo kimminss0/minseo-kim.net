@@ -115,7 +115,7 @@ blockquote {
   overflow-y: clip;
 }
 
-.home-social-links {
+.social-links {
   display: flex;
   gap: 0.5rem;
 }
