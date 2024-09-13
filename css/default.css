@@ -39,10 +39,16 @@ h1 {
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 2.2rem;
+}
+
+p {
+  margin-block-start: 1.3em;
+  margin-block-end: 1.3em;
 }
 
 article .header {
+  margin-bottom: 2.5rem;
   font-size: 1.4rem;
   font-style: italic;
   color: #555;
@@ -117,6 +123,17 @@ blockquote {
   padding: 0 0 0 1rem;
 }
 
+figure {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
+#footnotes {
+  margin-top: 6rem;
+}
+
 .katex-display {
   overflow-x: auto;
   overflow-y: clip;
@@ -134,7 +151,7 @@ blockquote {
     padding: 0 5%;
   }
   header {
-    margin: 2.4rem 0;
+    margin: 1.6rem 0;
   }
   nav {
     margin: 0 auto 1.2rem;
@@ -163,7 +180,7 @@ blockquote {
     padding: 0 5%;
   }
   header {
-    margin: 2.4rem 0;
+    margin: 1.6rem 0;
   }
   nav {
     margin: 0 auto 1.2rem;
