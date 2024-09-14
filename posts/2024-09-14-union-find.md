@@ -1,6 +1,5 @@
 ---
 title: "Union-find"
-katex: on
 ---
 
 > PS(Problem Solving) 문제 풀이를 위해 작성한 글입니다. 이론적인 설명은
