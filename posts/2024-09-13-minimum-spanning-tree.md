@@ -9,7 +9,7 @@ title: 최소신장트리 (MST, Minimum spanning tree)
 
 - Kruskal 알고리즘은 MST를 Greedy하게 찾는 알고리즘이다.
 - cycle이 형성되지 않도록 최소 비용 간선을 선택해나간다.
-- cycle이 형성되었는지 알기 위해 union-find을 사용한다.
+- cycle이 형성되었는지 알기 위해 union-find를 사용한다.
 
 ## Minimum spanning tree
 
@@ -31,7 +31,7 @@ MST를 greedy하게 찾을 수 있다. **cycle이 형성되지 않도록** 주�
 비용 간선을 선택**해나간다. 그래프 이론의 cut property에 의해 최적해가 보장된다.
 
 그래프에 간선을 추가했을 때 cycle이 형성되려면 양 끝 정점이 동일한 컴포넌트에
-속하면 되는데, 이를 판별하기 위하여 **[union-find](/posts/2024-09-12-union-find)** 자료구조를 활용한다.
+속하면 되는데, 이를 판별하기 위하여 **[union-find](/posts/2024-09-14-union-find)** 자료구조를 활용한다.
 
 **구현 방법**. Union-find는 disjoint set들을 나타내는 자료구조다. 간선을 고르고
 disjoint set들을 합쳐나가며 문제를 풀겠다.

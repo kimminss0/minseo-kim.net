@@ -7,7 +7,7 @@ title: "Union-find"
 
 ## TL;DR
 
-- Union-find는 집합은 tree로 표현한다.
+- Union-find는 집합을 tree로 표현한다.
 - `union`은 tree를 합치는 연산이다.
 - `find`는 tree의 root를 찾는 연산이다.
 - union by rank, path compression으로 최적화한다.
