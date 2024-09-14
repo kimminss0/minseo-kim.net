@@ -46,7 +46,7 @@ disjoint set들을 합쳐나가며 문제를 풀겠다.
 의사코드는 다음과 같다.
 
 ```
-procedure Kruskal(G = (V, E))
+function Kruskal(G = (V, E))
     X := {}
     for each vertex u ∈ V
         MAKESET(u)
