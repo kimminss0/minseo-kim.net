@@ -1,10 +1,11 @@
---------------------------------------------------------------------------------
+-- vim: sw=4
 {-# LANGUAGE OverloadedStrings #-}
+import           System.FilePath
 import           Data.Monoid (mappend)
 import           Hakyll
-import Text.Pandoc.Options
+import           Text.Pandoc.Options
 
---------------------------------------------------------------------------------
+
 main :: IO ()
 main = hakyll $ do
     match ("images/*" .||. "js/*") $ do
@@ -16,20 +17,21 @@ main = hakyll $ do
         compile compressCssCompiler
 
     match (fromList ["about.md", "contact.md"]) $ do
-        route   $ setExtension "html"
-        compile $ mathPandocCompiler
+        route $ setExtension "html" `composeRoutes` appendIndex
+        compile $ pandocCustomCompiler
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
             >>= relativizeUrls
 
     match "posts/*" $ do
-        route $ setExtension "html"
-        compile $ mathPandocCompiler
+        route $ setExtension "html" `composeRoutes` appendIndex
+
+        compile $ pandocCustomCompiler
             >>= loadAndApplyTemplate "templates/post.html"    postCtx
             >>= loadAndApplyTemplate "templates/default.html" postCtx
             >>= relativizeUrls
 
     create ["posts.html"] $ do
-        route idRoute
+        route $ idRoute `composeRoutes` appendIndex
         compile $ do
             posts <- recentFirst =<< loadAll "posts/*"
             let archiveCtx =
@@ -59,19 +61,29 @@ main = hakyll $ do
     match "templates/*" $ compile templateBodyCompiler
 
 
---------------------------------------------------------------------------------
+appendIndex :: Routes
+appendIndex = customRoute $
+    (\(p, e) -> p </> "index" <.> e) . splitExtension . toFilePath
+
+
+dropIndexHtml :: String -> Context a
+dropIndexHtml key = mapContext transform (urlField key) where
+    transform url = case splitFileName url of
+        (p, "index.html") -> takeDirectory p
+        _                 -> url
+
+
 postCtx :: Context String
 postCtx =
-    dateField "date" "%F" `mappend` -- format defined on Data.Time.Format module
+    dateField "date" "%F" `mappend` -- format defined at Data.Time.Format
+    dropIndexHtml "url"   `mappend`
     defaultContext
 
-readerOpts :: ReaderOptions
-readerOpts = defaultHakyllReaderOptions
 
-writerOpts :: WriterOptions
-writerOpts = defaultHakyllWriterOptions {
-    writerHTMLMathMethod = MathJax ""
-}
-
-mathPandocCompiler :: Compiler (Item String)
-mathPandocCompiler = pandocCompilerWith readerOpts writerOpts
+pandocCustomCompiler :: Compiler (Item String)
+pandocCustomCompiler = pandocCompilerWith readerOpts writerOpts
+  where
+    readerOpts = defaultHakyllReaderOptions
+    writerOpts = defaultHakyllWriterOptions {
+        writerHTMLMathMethod = MathJax ""
+    }
