@@ -17,8 +17,10 @@ title: "Union-find"
 
 ## Union-find
 
-Disjoint set의 collection을 나타내는 자료구조다. 다르게 표현하면,
+Disjoint set[^1]의 collection을 나타내는 자료구조다. 다르게 표현하면,
 **집합의 파티션**을 나타내는 자료구조다.
+
+[^1]: 서로소 집합. 공통 원소가 없는 두 집합이다.
 
 Union-find API는 다음 연산을 지원한다.
 

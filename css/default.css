@@ -47,6 +47,23 @@ p {
   margin-block-end: 1.3em;
 }
 
+.footnotes p {
+  margin-block-start: unset;
+  margin-block-end: unset;
+}
+
+table {
+  border-collapse: collapse;
+  overflow: auto;
+  display: block;
+  word-break: keep-all;
+}
+
+table :is(td, th) {
+  border: 1px solid black;
+  padding: 0.2em 0.4em;
+}
+
 article .header {
   margin-bottom: 2.5rem;
   font-size: 1.4rem;
