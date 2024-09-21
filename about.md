@@ -31,7 +31,7 @@ katex: on
 [CV]: https://github.com/kimminss0/CV
 [Vim]: https://www.vim.org
 [Neovim]: https://neovim.io
-[Haskell]: https://haskell.org
+[Haskell]: https://www.haskell.org
 [Hakyll]: https://jaspervdj.be/hakyll
 [KaTeX]: https://katex.org
 [source-code]: https://github.com/kimminss0/minseo-kim.net
