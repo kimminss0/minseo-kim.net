@@ -7,7 +7,7 @@ katex: on
 
 ## Introduction
 
-Prim 알고리즘은 [minimum spanning tree](/posts/2024-09-13-minimum-spanning-tree)를 찾는 그리디 알고리즘이다. priority queue 자료구조를 사용한다. 임의의 시작 정점에서부터 트리를 성장시키며 MST를 찾으며, priority queue의 이점을 활용한다.
+Prim 알고리즘은 [minimum spanning tree](/posts/2024-09-13-minimum-spanning-tree)를 찾는 그리디 알고리즘이다. 임의의 시작 정점에서부터 트리를 성장시키며 MST를 찾으며, priority queue의 이점을 활용한다.
 
 ## Algorithm
 
