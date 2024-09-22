@@ -1,12 +1,12 @@
 # minseo-kim.net
 
-Personal website built with [Hakyll](https://jaspervdj.be/hakyll/), a static site generator. Hosted at [minseo-kim.net](https://minseo-kim.net).
+Personal website built with [Hakyll](https://jaspervdj.be/hakyll/), a static site generator written in Haskell. Hosted at [minseo-kim.net](https://minseo-kim.net).
 
 ## How to Build
 
 ### Prerequisites
 
-Make sure you have Haskell and Cabal installed. It is recommended to use GHCup for the installation.
+Make sure you have Cabal installed. It is recommended to use GHCup for installation.
 
 ### Build Steps
 
@@ -18,9 +18,9 @@ $ cabal build all
 $ cabal exec site build
 ```
 
-Please note that the compilation may take some time.
+Please note that the compilation process may take some time.
 
-To preview the website, start the local server:
+To preview the website locally, start the server:
 
 ```sh
 $ cabal exec site watch
