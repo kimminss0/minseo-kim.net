@@ -100,8 +100,19 @@ img {
   max-width: 100%;
 }
 
+figcaption {
+  font-size: 1.4rem;
+  color: #555;
+  margin: 0.5em 0 0;
+}
+
 figure {
   text-align: center;
+
+  margin-block-start: 2em;
+  margin-block-end: 2em;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
 }
 
 a {
@@ -138,13 +149,6 @@ blockquote {
   border-left: 1px solid #888;
   margin: 0;
   padding: 0 0 0 1rem;
-}
-
-figure {
-  margin-block-start: 0;
-  margin-block-end: 0;
-  margin-inline-start: 0;
-  margin-inline-end: 0;
 }
 
 #footnotes {
