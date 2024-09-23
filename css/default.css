@@ -159,6 +159,7 @@ hr {
 
 .utterances {
   margin-block-start: -1em;
+  margin-block-end: 3em;
 }
 
 .katex-display {
