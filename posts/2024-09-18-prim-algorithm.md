@@ -1,15 +1,15 @@
 ---
-title: "Prim's algorithm"
+title: Prim 알고리즘
 katex: on
 ---
 
 > PS(Problem Solving) 문제 풀이를 위해 작성한 글입니다. 이론적인 설명은 배제했습니다.
 
-## Introduction
+## 개요
 
 Prim 알고리즘은 [minimum spanning tree](/posts/2024-09-13-minimum-spanning-tree)를 찾는 그리디 알고리즘이다. 임의의 시작 정점에서부터 트리를 성장시키며 MST를 찾으며, priority queue의 이점을 활용한다.
 
-## Algorithm
+## 알고리즘
 
 프림 알고리즘은 임의의 시작 정점에서 시작하여 트리를 확장해나가는데, 트리에 인접한 간선 중 최소 비용인 것을 선택한다. 트리에 인접한 최소 가중치 간선을 찾기 위해 **연결 비용**이라는 개념을 도입한다.
 
@@ -19,7 +19,7 @@ Prim 알고리즘은 [minimum spanning tree](/posts/2024-09-13-minimum-spanning-
 
 연결 비용을 다시 계산할 때도 모든 간선의 가중치를 비교할 필요는 없다. 트리에 추가된 정점 $v$와 그 인접 정점 $w$에 대해, $w$의 새로운 연결 비용은 기존 연결 비용과 간선 $vw$의 가중치 중 작은 값이다.
 
-## Data structures
+## 자료구조
 
 연결 비용은 priority queue로 관리된다. priority queue는 데이터가 항상 정렬된 상태로 유지되며, 데이터의 삽입과 추출이 빈번한 상황에서 효율적이다. 연결 비용은 자주 갱신되며, 최소값을 반복적으로 검색해야 하므로 priority queue를 사용하는 것이 적합하다.
 
@@ -29,13 +29,13 @@ Prim 알고리즘은 [minimum spanning tree](/posts/2024-09-13-minimum-spanning-
 
 [^1]: 실제로는 **(정점, 연결 비용, 다른 정점)**으로 충분하다. 간선이 이미 정점과 연결 비용(간선 가중치)를 포함하고 있기 때문이다. 이 튜플은 간선과 1:1 대응된다.
 
-## Implementation
+## 구현
 
 > 구현은 BOJ 문제 답안을 참고한다.
  
 - [\[BOJ\] #1197 최소 스패닝 트리](/posts/2024-09-21-boj-1197-mst#prim)
 
-## Miscellaneous
+## 기타
 
 ### Kruskal vs Prim
 
@@ -45,7 +45,7 @@ Kruskal 알고리즘 또한 MST를 찾는 알고리즘이다. Kruskal은 희소 
 
 이는 시간 복잡도만으로 알고리즘의 속도를 평가할 수 없음을 시사한다. Big-O 표기법에서 상수 계수 등은 생략하기 때문이다.
 
-## Reference
+## 참조
 
 - [프린스턴 대학 알고리즘 강의 - Minimum Spanning
 Trees](https://algs4.cs.princeton.edu/43mst/)

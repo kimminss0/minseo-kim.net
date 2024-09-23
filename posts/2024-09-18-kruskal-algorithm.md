@@ -1,14 +1,14 @@
 ---
-title: "Kruskal's algorithm"
+title: Kruskal 알고리즘
 ---
 
 > PS(Problem Solving) 문제 풀이를 위해 작성한 글입니다. 이론적인 설명은 배제했습니다.
 
-## Introduction
+## 개요
  
 Kruskal 알고리즘은 [minimum spanning tree](/posts/2024-09-13-minimum-spanning-tree)를 찾는 그리디 알고리즘이다. 간선을 정렬하여 최소 비용 간선부터 선택하며, 이 과정에서 사이클이 형성되지 않도록 한다. 사이클의 형성 여부를 판별하기 위해 Union-find 자료구조를 사용한다.
 
-## Algorithm
+## 알고리즘
 
 알고리즘의 핵심은 매 순간 **최소 비용 간선을 선택**하면서, **사이클이 형성되지 않도록** 주의하는 것이다.
 
@@ -24,7 +24,7 @@ Kruskal 알고리즘은 [minimum spanning tree](/posts/2024-09-13-minimum-spanni
 
 [^1]: 무방향 그래프에서 두 정점 v와 u 사이에 경로가 존재하면, 이들을 **연결되었다(connected)**고 정의한다. 반대로, 경로가 존재하지 않으면 **연결되지 않았다(disconnected)**고 정의한다. 
 
-## Data structure
+## 자료구조
 
 ### Union-find
 
@@ -41,7 +41,7 @@ Kruskal 알고리즘은 [minimum spanning tree](/posts/2024-09-13-minimum-spanni
 [^2]: 서로소 집합. 공통 원소가 없는 두 집합을 말한다.
 [^3]: u, v를 양 끝 정점으로 하는 간선
 
-## Pseudocode
+## 의사코드
 
 위에서 논의한 내용을 종합하여 Kruskal 알고리즘을 단계별로 나누면 다음과 같다.
 
@@ -70,7 +70,7 @@ function Kruskal(G = (V, E))
 
 [union-find-code]: /posts/2024-09-14-union-find#pseudocode
 
-## Implementation
+## 구현
 
 > 구현은 BOJ 문제 답안을 참고한다.
  
@@ -115,13 +115,13 @@ function Kruskal(G = (V, E))
 <!--}-->
 <!--```-->
 
-## Miscellaneous
+## 기타
 
 ### Kruskal vs Prim
 
 - Prim 알고리즘 문서 참조 [링크](/posts/2024-09-18-prim-algorithm#kruskal-vs-prim)
 
-## Reference
+## 참조
 
 - [프린스턴 대학 알고리즘 강의 - Minimum Spanning Trees](https://algs4.cs.princeton.edu/43mst/)
 - [블로그 1](https://rntlqvnf.github.io/lecture%20notes/algorithm-5th-week-1/)
