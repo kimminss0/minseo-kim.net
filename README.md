@@ -26,3 +26,7 @@ To preview the website locally, start the server:
 $ cabal exec site watch
 ```
 
+## Note
+
+Please note that the markdown syntax used for this site may differ from GitHub-flavored markdown. As a result, certain elements like images or LaTeX syntax might not render correctly when viewed on other platforms, such as GitHub markdown preview, rather than pandoc.
+
