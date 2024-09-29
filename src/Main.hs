@@ -1,13 +1,16 @@
 -- vim: sw=4
 {-# LANGUAGE OverloadedStrings #-}
 import           System.FilePath
-import           Data.Monoid (mappend)
 import           Hakyll
 import           Text.Pandoc.Options
 
 
 main :: IO ()
 main = hakyll $ do
+    match "static/*" $ do
+        route $ gsubRoute "static/" (const "")
+        compile copyFileCompiler
+
     match ("images/*" .||. "js/*") $ do
         route   idRoute
         compile copyFileCompiler
