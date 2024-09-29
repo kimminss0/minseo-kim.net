@@ -21,8 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up GHC
-        uses: haskell-actions/setup@v2
+      - uses: haskell-actions/setup@v2
         id: setup
         with:
           ghc-version: 9.6
@@ -34,7 +33,7 @@ jobs:
         run: |
           cabal configure --enable-tests --enable-benchmarks --disable-documentation
           cabal build all --dry-run
-        # The last step generates dist-newstyle/cache/plan.json for the cache key.
+        # generates dist-newstyle/cache/plan.json for the cache key.
 
       - name: Restore cached dependencies
         uses: actions/cache/restore@v4
@@ -60,34 +59,26 @@ jobs:
           path: ${{ steps.setup.outputs.cabal-store }}
           key: ${{ steps.cache.outputs.cache-primary-key }}
 
-      - name: Build website builder
-        run: cabal build all
-
       - name: Build website
-        run: cabal exec site build
+        run: |
+          cabal build all
+          cabal exec site build
 
-      - name: Upload build
-        uses: actions/upload-artifact@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: blog-${{ github.sha }}
-          path: _site/
+          path: ./_site
 
   deploy:
     needs: build
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    permissions:
+      pages: write
+      id-token: write
+
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: Download build
-        uses: actions/download-artifact@v4
-        with:
-          name: blog-${{ github.sha }}
-          path: _site/
-      - run: touch _site/.nojekyll
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
 
-      - name: Deploy website
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages
-          folder: _site
-          ssh-key: ${{ secrets.DEPLOY_KEY }}
+
