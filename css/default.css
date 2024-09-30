@@ -176,6 +176,11 @@ hr {
   gap: 0.5rem;
 }
 
+.post-list .date {
+  white-space: nowrap;
+  color: #555;
+}
+
 @media (max-width: 319px) {
   body {
     width: 90%;
