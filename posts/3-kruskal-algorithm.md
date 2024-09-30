@@ -7,7 +7,7 @@ published: 2024-09-18T17:00:00+09:00
 
 ## 개요
  
-Kruskal 알고리즘은 [minimum spanning tree](/posts/2024-09-13-minimum-spanning-tree)를 찾는 그리디 알고리즘이다. 간선을 정렬하여 최소 비용 간선부터 선택하며, 이 과정에서 사이클이 형성되지 않도록 한다. 사이클의 형성 여부를 판별하기 위해 Union-find 자료구조를 사용한다.
+Kruskal 알고리즘은 [minimum spanning tree](/posts/1/minimum-spanning-tree)를 찾는 그리디 알고리즘이다. 간선을 정렬하여 최소 비용 간선부터 선택하며, 이 과정에서 사이클이 형성되지 않도록 한다. 사이클의 형성 여부를 판별하기 위해 Union-find 자료구조를 사용한다.
 
 ## 알고리즘
 
@@ -29,7 +29,7 @@ Kruskal 알고리즘은 [minimum spanning tree](/posts/2024-09-13-minimum-spanni
 
 ### Union-find
 
-[Union-find](/posts/2024-09-14-union-find)는 disjoint set[^2]의 collection을 나타내는 자료구조다. 다음 3가지 연산을 지원한다.
+[Union-find](/posts/2/union-find)는 disjoint set[^2]의 collection을 나타내는 자료구조다. 다음 3가지 연산을 지원한다.
 
 - `makeset(x)`: x를 유일한 원소로 두는 새로운 집합 생성. 초기화를 위해 사용.
 - `find(x)`: x가 속한 집합을 반환
@@ -69,13 +69,13 @@ function Kruskal(G = (V, E))
 
 > Union-find의 의사코드는 [해당 문서][union-find-code] 를 참조한다.
 
-[union-find-code]: /posts/2024-09-14-union-find#pseudocode
+[union-find-code]: /posts/2/union-find#pseudocode
 
 ## 구현
 
 > 구현은 BOJ 문제 답안을 참고한다.
  
-- [\[BOJ\] #1197 최소 스패닝 트리](/posts/2024-09-21-boj-1197-mst#kruskal)
+- [\[BOJ\] #1197 최소 스패닝 트리](/posts/5/boj-1197#kruskal)
 
 <!--다음은 c++17로 작성한 Kruskal 알고리즘이다.-->
 <!---->
@@ -120,7 +120,7 @@ function Kruskal(G = (V, E))
 
 ### Kruskal vs Prim
 
-- Prim 알고리즘 문서 참조 [링크](/posts/2024-09-18-prim-algorithm#kruskal-vs-prim)
+- Prim 알고리즘 문서 참조 [링크](/posts/4/prim-algorithm#kruskal-vs-prim)
 
 ## 참조
 

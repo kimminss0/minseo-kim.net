@@ -24,8 +24,8 @@ katex: on
 
 다음은 MST를 구하는 알고리즘 목록이다.
 
-- [Kruskal's algorithm](/posts/2024-09-18-kruskal-algorithm)
-- [Prim's algorithm](/posts/2024-09-18-prim-algorithm)
+- [Kruskal's algorithm](/posts/3/kruskal-algorithm)
+- [Prim's algorithm](/posts/4/prim-algorithm)
 
 각 알고리즘을 비교하면 다음과 같다.
 

@@ -8,7 +8,7 @@ published: 2024-09-18T18:00:00+09:00
 
 ## 개요
 
-Prim 알고리즘은 [minimum spanning tree](/posts/2024-09-13-minimum-spanning-tree)를 찾는 그리디 알고리즘이다. 임의의 시작 정점에서부터 트리를 성장시키며 MST를 찾으며, priority queue의 이점을 활용한다.
+Prim 알고리즘은 [minimum spanning tree](/posts/1/minimum-spanning-tree)를 찾는 그리디 알고리즘이다. 임의의 시작 정점에서부터 트리를 성장시키며 MST를 찾으며, priority queue의 이점을 활용한다.
 
 ## 알고리즘
 
@@ -34,7 +34,7 @@ Prim 알고리즘은 [minimum spanning tree](/posts/2024-09-13-minimum-spanning-
 
 > 구현은 BOJ 문제 답안을 참고한다.
  
-- [\[BOJ\] #1197 최소 스패닝 트리](/posts/2024-09-21-boj-1197-mst#prim)
+- [\[BOJ\] #1197 최소 스패닝 트리](/posts/5/boj-1197#prim)
 
 ## 기타
 
