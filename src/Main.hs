@@ -47,6 +47,16 @@ main = hakyll $ do
                 >>= loadAndApplyTemplate "templates/default.html" archiveCtx
                 >>= relativizeUrls
 
+    create ["sitemap.xml"] $ do 
+        route idRoute
+        compile $ do
+            posts <- recentFirst =<< loadAll "posts/*"
+            let sitemapCtx =
+                    listField "posts" postCtx (return posts) `mappend`
+                    defaultContext
+            
+            makeItem ""
+                >>= loadAndApplyTemplate "templates/sitemap.xml" sitemapCtx
 
     match "index.html" $ do
         route idRoute
@@ -62,7 +72,6 @@ main = hakyll $ do
                 >>= relativizeUrls
 
     match "templates/*" $ compile templateBodyCompiler
-
 
 appendIndex :: Routes
 appendIndex = customRoute $
