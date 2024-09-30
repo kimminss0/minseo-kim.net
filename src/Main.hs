@@ -30,7 +30,7 @@ main = hakyll $ do
         >>= relativizeUrls
 
   match "posts/*" $ do
-    route $ setExtension "html" `composeRoutes` appendIndex
+    route $ setExtension "html" `composeRoutes` appendIndex `composeRoutes` slugToPath
 
     compile $
       pandocCustomCompiler
@@ -145,3 +145,6 @@ pandocCustomCompiler = pandocCompilerWith readerOpts writerOpts
       defaultHakyllWriterOptions
         { writerHTMLMathMethod = MathJax ""
         }
+
+slugToPath :: Routes
+slugToPath = gsubRoute "/[0-9]*-" $ replaceAll "-" (const "/")
