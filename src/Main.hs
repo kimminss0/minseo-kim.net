@@ -1,7 +1,12 @@
 -- vim: sw=4
 {-# LANGUAGE OverloadedStrings #-}
-import           System.FilePath
+import           Control.Monad       (msum)
+import           Data.Time           (TimeZone (TimeZone), ZonedTime,
+                                      utcToZonedTime)
+import           Data.Time.Clock
+import           Data.Time.Format
 import           Hakyll
+import           System.FilePath
 import           Text.Pandoc.Options
 
 
@@ -47,14 +52,14 @@ main = hakyll $ do
                 >>= loadAndApplyTemplate "templates/default.html" archiveCtx
                 >>= relativizeUrls
 
-    create ["sitemap.xml"] $ do 
+    create ["sitemap.xml"] $ do
         route idRoute
         compile $ do
             posts <- recentFirst =<< loadAll "posts/*"
             let sitemapCtx =
                     listField "posts" postCtx (return posts) `mappend`
                     defaultContext
-            
+
             makeItem ""
                 >>= loadAndApplyTemplate "templates/sitemap.xml" sitemapCtx
 
@@ -87,9 +92,49 @@ dropIndexHtml key = mapContext transform (urlField key) where
 
 postCtx :: Context String
 postCtx =
-    dateField "date" "%F" `mappend` -- format defined at Data.Time.Format
-    dropIndexHtml "url"   `mappend`
+    dateFieldWithZone zone "date" "%F" `mappend`
+    dateFieldWithZone zone "datetime" "%Y-%m-%dT%H:%M:%S%Ez" `mappend`
+    updateFieldWithZone zone "lastmodDate" "%F" `mappend`
+    updateFieldWithZone zone "lastmodDatetime" "%Y-%m-%dT%H:%M:%S%Ez" `mappend`
+    dropIndexHtml "url" `mappend`
     defaultContext
+    where zone = TimeZone (9 * 60) False "KST"
+
+
+dateFieldWithZone :: TimeZone -> String -> String -> Context String
+dateFieldWithZone zone key format = field key $ \i -> do
+    let locale = defaultTimeLocale
+    time <- getItemZonedTime "published" zone locale $ itemIdentifier i
+    return $ formatTime locale format time
+
+
+updateFieldWithZone :: TimeZone -> String -> String -> Context String
+updateFieldWithZone zone key format = field key $ \i -> do
+    let locale = defaultTimeLocale
+    time <- getItemZonedTime "updated" zone locale $ itemIdentifier i
+    return $ formatTime locale format time
+
+
+getItemZonedTime :: (MonadMetadata m, MonadFail m)
+              => String
+              -> TimeZone
+              -> TimeLocale
+              -> Identifier
+              -> m ZonedTime
+getItemZonedTime key zone locale id' = do
+    metadata <- getMetadata id'
+    let tryField k fmt = lookupString k metadata
+            >>= parseTime' fmt >>= Just . utcToZonedTime zone
+    maybe empty' return $ msum [tryField key fmt | fmt <- formats]
+    where
+        empty' = fail $ "getItemZonedTime: " ++ "could not parse time for " ++ show id'
+        parseTime' :: String -> String -> Maybe UTCTime
+        parseTime' = parseTimeM True locale
+        formats    =
+            [ "%Y-%m-%d"
+            , "%Y-%m-%dT%H:%M:%S%EZ"
+            , "%Y-%m-%dT%H:%M:%S"
+            ]
 
 
 pandocCustomCompiler :: Compiler (Item String)

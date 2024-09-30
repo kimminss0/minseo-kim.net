@@ -1,8 +1,9 @@
 <article>
     <section class="header">
-        Posted on $date$
-        $if(author)$
-            by $author$
+        <span class="date">발행: $date$</span>
+        $if(lastmodDate)$
+          /
+          <span class="lastmod">수정: $lastmodDate$</span>
         $endif$
     </section>
     <section class="article-body">

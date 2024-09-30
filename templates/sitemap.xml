@@ -8,7 +8,7 @@
 $for(posts)$
   <url>
     <loc>https://minseo-kim.net$url$</loc>
-    <lastmod>$if(date)$$date$$endif$</lastmod>
+    <lastmod>$if(lastmodDatetime)$$lastmodDatetime$$else$$if(datetime)$$datetime$$endif$$endif$</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

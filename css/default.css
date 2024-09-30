@@ -71,7 +71,7 @@ table :is(td, th) {
 article .header {
   margin-bottom: 2.5rem;
   font-size: 1.4rem;
-  font-style: italic;
+  /*font-style: italic;*/
   color: #555;
 }
 
@@ -179,6 +179,11 @@ hr {
 .post-list .date {
   white-space: nowrap;
   color: #555;
+}
+
+.header .date,
+.header .lastmod {
+  white-space: nowrap;
 }
 
 @media (max-width: 319px) {

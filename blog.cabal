@@ -19,4 +19,5 @@ executable site
                   , hakyll >= 4.16 && < 5
                   , pandoc
                   , filepath
+                  , time
   ghc-options:      -Wall -threaded -rtsopts -with-rtsopts=-N

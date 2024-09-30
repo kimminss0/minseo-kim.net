@@ -1,6 +1,7 @@
 ---
 title: Prim 알고리즘
 katex: on
+published: 2024-09-18T18:00:00+09:00
 ---
 
 > PS(Problem Solving) 문제 풀이를 위해 작성한 글입니다. 이론적인 설명은 배제했습니다.
