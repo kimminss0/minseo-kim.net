@@ -1,8 +1,8 @@
 <ul>
-    $for(posts)$
-        <li class="post-list">
-          <a href="$url$">$title$</a>
-          <span class="date">[$date$]</span>
-        </li>
-    $endfor$
+  $for(posts)$
+  <li class="post-list">
+    <a href="$url$">$title$</a>
+    <span class="date">[<time datetime="$datetime$">$date$</time>]</span>
+  </li>
+  $endfor$
 </ul>

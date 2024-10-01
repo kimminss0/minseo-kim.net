@@ -1,14 +1,14 @@
 <article>
-    <section class="header">
-        <span class="date">발행: $date$</span>
-        $if(lastmodDate)$
-          /
-          <span class="lastmod">수정: $lastmodDate$</span>
-        $endif$
-    </section>
-    <section class="article-body">
-        $body$
-    </section>
+  <section class="header">
+    <span class="date">발행: <time datetime="$datetime$">$date$</time></span>
+    $if(lastmodDate)$
+    /
+    <span class="lastmod">수정: <time datetime="$lastmodDatetime$">$lastmodDate$</time></span>
+    $endif$
+  </section>
+  <section class="article-body">
+    $body$
+  </section>
 </article>
 <section class="comments">
   <hr>
