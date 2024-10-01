@@ -63,6 +63,12 @@ main = hakyll $ do
       makeItem ""
         >>= loadAndApplyTemplate "templates/sitemap.xml" sitemapCtx
 
+  match "404.md" $ do
+    route $ setExtension "html"  
+    compile $
+      pandocCustomCompiler
+        >>= loadAndApplyTemplate "templates/default.html" defaultContext
+
   match "index.html" $ do
     route idRoute
     compile $ do
