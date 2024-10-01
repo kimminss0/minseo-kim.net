@@ -62,7 +62,7 @@ jobs:
           cabal exec site build
 
       - name: Tar files
-        run: tar -cjvf bundle.tar.xz -C _site .
+        run: tar -cJvf bundle.tar.xz -C _site .
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -78,6 +78,7 @@ jobs:
       VPS_USERNAME: ${{ secrets.VPS_USERNAME }}
       VPS_KEY: ${{ secrets.VPS_KEY }}
       VPS_PORT: ${{ secrets.VPS_PORT}}
+      VPS_WWW_DIR: ${{ secrets.VPS_WWW_DIR }}
     steps:
       - name: Download build
         uses: actions/download-artifact@v4
@@ -107,4 +108,9 @@ jobs:
           port: ${{ env.VPS_PORT }}
           script: |
             cd /home/${{ env.VPS_USERNAME }}
-            sudo ./deploy.sh bundle.tar.xz
+            dir=$(mktemp -d /tmp/${{ env.VPS_USERNAME }}.XXXXXX)
+            trap 'sudo rm -rf $dir' EXIT
+            tar -xJf bundle.tar.xz -C $dir
+            sudo chown -R www:www $dir
+            sudo rsync --delete -avh $dir/ ${{ env.VPS_WWW_DIR }}/
+            rm bundle.tar.xz
