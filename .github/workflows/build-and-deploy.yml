@@ -112,5 +112,5 @@ jobs:
             trap 'sudo rm -rf $dir' EXIT
             tar -xJf bundle.tar.xz -C $dir
             sudo chown -R www:www $dir
-            sudo rsync --delete -avh $dir/ ${{ env.VPS_WWW_DIR }}/
+            sudo rsync --checksum --delete -avh $dir/ ${{ env.VPS_WWW_DIR }}/
             rm bundle.tar.xz
