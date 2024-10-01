@@ -1,4 +1,4 @@
-name: build
+name: Build and Deploy
 on:
   push:
     branches: [main]
@@ -15,9 +15,6 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-
     steps:
       - uses: actions/checkout@v4
 
@@ -64,21 +61,50 @@ jobs:
           cabal build all
           cabal exec site build
 
+      - name: Tar files
+        run: tar -cjvf bundle.tar.xz -C _site .
+
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          path: ./_site
+          name: bundle
+          path: ./bundle.tar.xz
 
   deploy:
     needs: build
-
-    permissions:
-      pages: write
-      id-token: write
-
     runs-on: ubuntu-latest
+    env:
+      VPS_IP: ${{ secrets.VPS_IP }}
+      VPS_USERNAME: ${{ secrets.VPS_USERNAME }}
+      VPS_KEY: ${{ secrets.VPS_KEY }}
+      VPS_PORT: ${{ secrets.VPS_PORT}}
     steps:
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
+      - name: Download build
+        uses: actions/download-artifact@v4
+        with:
+          name: bundle
 
+      - name: Copy files via SCP
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ env.VPS_IP }}
+          username: ${{ env.VPS_USERNAME }}
+          key: ${{ env.VPS_KEY }}
+          password: ""
+          passphrase: ""
+          port: ${{ env.VPS_PORT }}
+          source: ./bundle.tar.xz
+          target: "/home/${{ env.VPS_USERNAME }}"
 
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ env.VPS_IP }}
+          username: ${{ env.VPS_USERNAME }}
+          key: ${{ env.VPS_KEY }}
+          password: ""
+          passphrase: ""
+          port: ${{ env.VPS_PORT }}
+          script: |
+            cd /home/${{ env.VPS_USERNAME }}
+            sudo ./deploy.sh bundle.tar.xz
