@@ -1,6 +1,7 @@
 ---
 title: FreeBSD VNET Jail 구성 방법
 published: 2024-09-25T15:27:41+0900
+updated: 2024-10-02T18:47:00+0900
 ---
 
 FreeBSD의 VNET Jail이 무엇인지, 어디에 쓰는지 소개한다. 구성 과정에서 마주칠 수
@@ -45,12 +46,33 @@ Jail 또한 Docker의 편의성에는 못 미친다. 다만 Docker는 개발 도
 다르다는 사실은 VNET Jail에서 네트워크 인터페이스와 라우팅 테이블이 호스트와
 완전히 독립되어 있다는 점에서 맥락을 이해할 수 있다.
 
-대조적으로, Non-vnet Jail은 호스트에서 제공하는 **NAT**에 의존하여 사설 IP를
-할당받으며, 호스트와 네트워크 인터페이스, 라우팅 테이블을 공유한다.
-
 [network-stack]: https://en.wikipedia.org/wiki/Protocol_stack
 
+### Non-VNET Jail과 비교
+
+네트워크 스택이 호스트로부터 독립되어 있다는 점에서, VNET Jail은 다음과 같은
+특징을 갖는다.
+
+1. **네트워크 인터페이스가 호스트와 다르다.** 따라서 호스트와 다른 서브넷의
+   ip를 할당받을 수 있다. Non-VNET Jail는 ip aliasing을 이용하여 호스트와
+   같은 서브넷 내에서만 ip를 할당받는다.
+2. **라우팅 테이블이 호스트와 분리된다.** Non-VNET Jail에서는 policy-based
+   routing으로 라우팅을 분리할 수 있지만, VNET Jail에서는 호스트와 동등한
+   별개의 머신처럼 라우팅을 관리할 수 있다.
+3. **방화벽 규칙을 개별적으로 설정할 수 있다.** Non-VNET Jail은 호스트의 방화벽
+   규칙을 따르지만, VNET Jail은 각 Jail을 별개의 머신으로 보고 독립적인 방화벽
+   규칙을 적용할 수 있다.
+4. **관리 측면에서 호스트와 결합도가 낮아 관리가 용이하다.** 위에서 언급한
+   policy-based routing와 같이 non-VNET Jail에서도 동일한 목적을 달성할 수는
+   있어도, VNET Jail은 각 Jail을 호스트와 동등한 별개의 머신처럼 관리할 수 있기에
+   일종의 모듈화와 같은 효과가 있다.
+
 ### VNET Jail의 활용
+
+운용 예시를 살펴보면 VNET Jail의 매력을 이해하는 데 도움이 된다. VNET Jail은
+호스트와 다른 네트워크 인터페이스를 가지므로 각 Jail을 서로 다른 VLAN에 둘 수
+있다. 또한 라우팅 테이블이 호스트와 다르므로 일부 Jail을 특정한 VPN에
+연결하도록 구성할 수 있다.
 
 개인적으로 VNET Jail을 활용하여 호스트와 각 Jail에 고유한 IP를 부여하여 다양한
 웹 서비스를 운영하고 있다. 또한, **dnsmasq**로 로컬 DNS 서버를 구축해두고 각
