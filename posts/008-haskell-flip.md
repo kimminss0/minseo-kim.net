@@ -1,5 +1,5 @@
 ---
-title: "Haskell 토막글: 1. flip 함수"
+title: "Haskell 토막글: flip 함수"
 published: 2024-10-12T10:30:00+0900
 ---
 

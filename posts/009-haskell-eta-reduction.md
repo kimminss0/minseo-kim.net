@@ -1,5 +1,5 @@
 ---
-title: "Haskell 토막글: 2. η-reduction과 pointfree programming"
+title: "Haskell 토막글: η-reduction과 pointfree programming"
 published: 2024-10-12T11:22:00+0900
 ---
 
