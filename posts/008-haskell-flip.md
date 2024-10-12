@@ -46,11 +46,12 @@ tn' = flip tn val2
 다음 예시처럼 flip을 굳이 쓰지 않고도 infix opeartion을 활용할 수 있다.
 
 ```haskell
-fn :: a -> b -> c
+fn :: T -> String -> U
 
+fn' :: T -> U
 -- TFAE:
 fn' = flip fn "foobar" -- flip 사용
-fn' = (`fn` foobar)    -- infix로 표현 후 함수로 변형
+fn' = (`fn` "foobar")    -- infix로 표현 후 함수로 변형
 ```
 
 infix operation 활용하는게 더 흔할까? flip도 괜찮은 선택일까? 경험상 infix

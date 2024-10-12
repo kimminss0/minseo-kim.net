@@ -6,9 +6,9 @@ published: 2024-10-12T11:48:00+0900
 > **참고**: 영어로 연산 우선순위는 precedence, 결합 방향은
 associativity다.
 
-Haskell에서는 function application과 operation application을 구분한다. Function
-application의 예시로는 `show 123`이 있고, operation application의 예시로는 `1 +
-2`, ```3 `div` 2``` 등이 있다.
+Haskell에서는 **function application**과 **operation application**을 구분한다.
+Function application의 예시로는 `show 123`이 있고, operation application의
+예시로는 `1 + 2`, ```3 `div` 2``` 등이 있다.
 
 결합 우선순위는 function application이 operation application보다 항상 높다.
 다음은 간단한 예시다.
