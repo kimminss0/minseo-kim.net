@@ -64,7 +64,7 @@ main = hakyll $ do
         >>= loadAndApplyTemplate "templates/sitemap.xml" sitemapCtx
 
   match "404.md" $ do
-    route $ setExtension "html"  
+    route $ setExtension "html"
     compile $
       pandocCustomCompiler
         >>= loadAndApplyTemplate "templates/default.html" defaultContext
@@ -153,4 +153,7 @@ pandocCustomCompiler = pandocCompilerWith readerOpts writerOpts
         }
 
 slugToPath :: Routes
-slugToPath = gsubRoute "/[0-9]*-" $ replaceAll "-" (const "/")
+slugToPath =
+  gsubRoute "/[0-9]*-" $
+    replaceAll "-" (const "/")
+      . replaceAll "/0*" (const "/")
