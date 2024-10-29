@@ -47,6 +47,10 @@ p {
   margin-block-end: 1.3em;
 }
 
+.footnotes {
+  font-size: 85%;
+}
+
 .footnotes p {
   margin-block-start: 0.5em;
   margin-block-end: 0.5em;
