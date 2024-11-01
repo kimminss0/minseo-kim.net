@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap");
 
 html {
   font-size: 62.5%;
@@ -34,7 +34,7 @@ footer {
 }
 
 h1 {
-  margin: 1.0rem 0;
+  margin: 1rem 0;
   font-size: 2.4rem;
 }
 
@@ -87,20 +87,17 @@ article .header {
 
 .logo a .gray {
   color: #888;
-  
 }
 
 code {
   font-size: 95%;
-  font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+  font-family: Menlo, Monaco, Consolas, "Lucida Console", monospace;
   margin: 0;
   hyphens: manual;
 }
 pre {
   margin: 1em 0;
-  background-color: #f5f5f5;
   padding: 8px 15px;
-  border-radius: 5px;
   overflow: auto;
 }
 pre code {
@@ -113,6 +110,10 @@ pre code {
   overflow: visible;
 }
 div.sourceCode {
+  border-radius: 5px;
+}
+pre:not(.sourceCode) {
+  background-color: #f5f5f5;
   border-radius: 5px;
 }
 
@@ -195,6 +196,10 @@ hr {
 .post-list .date {
   white-space: nowrap;
   color: #555;
+}
+
+.comments {
+  min-height: 10em;
 }
 
 .header .date,
