@@ -1,63 +1,32 @@
-const observer = new MutationObserver(handleMutations);
 const commentsContainer = document.querySelector(".comments");
-let loadingTimeout = 0;
-
 if (commentsContainer) {
-  observer.observe(commentsContainer, {
-    childList: true,
+  let loadingTimeout = 0;
+  let loadingIndicator = document.createElement("div");
+  commentsContainer.appendChild(loadingIndicator);
+
+  const intersectionObserver = new IntersectionObserver((entries, observer) => {
+    if (entries[0].isIntersecting) {
+      loadingIndicator.innerHTML = "<span>댓글을 로딩중입니다...</span>";
+      loadingTimeout = setTimeout(() => {
+        loadingIndicator.innerHTML =
+          "<span>문제가 발생했습니다. 페이지를 새로고침 해주세요.</span>";
+      }, 1000 * 5);
+      observer.disconnect();
+    }
+  });
+  intersectionObserver.observe(loadingIndicator);
+
+  const mutationObserver = new MutationObserver((mutations, observer) => {
+    mutations.forEach((mutation) => {
+      if (mutation.target.classList.contains("utterances")) {
+        clearTimeout(loadingTimeout);
+        loadingIndicator.remove();
+        observer.disconnect();
+      }
+    });
+  });
+  mutationObserver.observe(commentsContainer, {
     attributeFilter: ["style"],
     subtree: true,
   });
-}
-
-function handleMutations(mutations) {
-  mutations.forEach((mutation) => {
-    if (mutation.type === "childList") {
-      handleChildListMutation(mutation);
-    } else if (mutation.type === "attributes") {
-      handleAttributeMutation(mutation);
-    }
-  });
-}
-
-function handleChildListMutation(mutation) {
-  mutation.addedNodes.forEach((node) => {
-    if (node instanceof HTMLElement && node.classList.contains("utterances")) {
-      attachLoadingIndicator(node.parentElement);
-    }
-  });
-}
-
-function attachLoadingIndicator(parent) {
-  if (parent.querySelector(".comments-loading")) {
-    return;
-  }
-  const loading = document.createElement("div");
-  loading.className = "comments-loading";
-  loading.innerHTML = "<span>댓글을 로딩중입니다...</span>";
-  parent.appendChild(loading);
-  loadingTimeout = setTimeout(() => {
-    loading.innerHTML =
-      "<span>문제가 발생했습니다. 페이지를 새로고침 해주세요.</span>";
-  }, 1000 * 15);
-}
-
-function handleAttributeMutation(mutation) {
-  const target = mutation.target;
-  if (
-    target instanceof HTMLElement &&
-    target.classList.contains("utterances")
-  ) {
-    removeLoadingIndicator(target);
-    observer.disconnect();
-  }
-}
-
-function removeLoadingIndicator(target) {
-  const loadingIndicator =
-    target.parentElement.querySelector(".comments-loading");
-  if (loadingIndicator) {
-    clearTimeout(loadingTimeout);
-    loadingIndicator.remove();
-  }
 }
