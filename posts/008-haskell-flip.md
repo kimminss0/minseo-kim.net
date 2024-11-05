@@ -7,12 +7,13 @@ published: 2024-10-12T10:30:00+0900
 > 것 같긴 하다.
 
 타입 시그니처를 살펴보자.
+
 ```haskell
 flip :: (a -> b -> c) -> b -> a -> c
 ```
 
-두 개의 인자를 받는 함수에서 arg1, arg2의 적용 순서를 arg2, arg1로 바꾼다.
-type signature를 같이 살펴보면 아주 명확하다. 다음은 적용 예시다.
+두 개의 인자를 받는 함수에서 arg1, arg2의 적용 순서를 arg2, arg1로 바꾼다. type
+signature를 같이 살펴보면 아주 명확하다. 다음은 적용 예시다.
 
 ```haskell
 fn :: T1 -> T2 -> U
@@ -43,7 +44,7 @@ tn' = flip tn val2
 
 **질문**. `flip`를 실제로 많이 쓰나?
 
-다음 예시처럼 flip을 굳이 쓰지 않고도 infix opeartion을 활용할 수 있다.
+다음 예시처럼 flip을 굳이 쓰지 않고도 infix operation을 활용할 수 있다.
 
 ```haskell
 fn :: T -> String -> U
@@ -59,4 +60,3 @@ infix operation 활용하는게 더 흔할까? flip도 괜찮은 선택일까? �
 
 개인적으로는 함수를 infix 이항 연산자로 바라봤을 때 부자연스럽지 않다면,
 flip보다 연산자로 접근하는 방법이 나은 것 같다.
-

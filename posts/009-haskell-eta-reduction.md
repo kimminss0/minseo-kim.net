@@ -41,4 +41,3 @@ addOne x = x + 1
 addOne1 :: Int -> Int
 addOne1 = (+ 1)
 ```
-

@@ -26,15 +26,17 @@ Union-find의 주요 개념은 다음과 같다.
 
 Union-find API는 다음 연산을 지원한다.
 
-- `makeset(x)`: x를 유일한 원소로 두는 새로운 집합 생성. 자료구조에 새로운 원소를 추가할 때 사용한다.
+- `makeset(x)`: x를 유일한 원소로 두는 새로운 집합 생성. 자료구조에 새로운
+  원소를 추가할 때 사용한다.
 - `find(x)`: x가 속한 집합을 반환
-- `union(x, y)`: x, y가 속한 두 집합을 병합 
+- `union(x, y)`: x, y가 속한 두 집합을 병합
 
 Union-find는 **집합을 트리 형태로 구현**한다. `union`은 트리를 합치는 연산이고,
 `find`는 트리의 root를 찾는 연산이다. 일반적으로 다음과 같이 구현한다.
 
 - `find(x)`는 root에 도달할 때까지 parent를 타고 올라간다.
-- `union(x, y)`는 두 트리의 root를 찾아 어느 하나를 다른 하나의 자식으로 편입한다.
+- `union(x, y)`는 두 트리의 root를 찾아 어느 하나를 다른 하나의 자식으로
+  편입한다.
 
 ## 최적화 기법
 
@@ -52,19 +54,18 @@ Union-find는 **집합을 트리 형태로 구현**한다. `union`은 트리를 
 
 - 새로 초기화된 node의 rank는 0이다.
 - root가 u, v인 두 트리를 병합할 때 다음을 따른다.
-    - u, v의 rank가 다르면 작은 것을 큰 것의 자식으로 편입한다.
-    - u, v의 rank가 같으면 어느 하나를 부모로 만들고 rank를 1 더한다.
+  - u, v의 rank가 다르면 작은 것을 큰 것의 자식으로 편입한다.
+  - u, v의 rank가 같으면 어느 하나를 부모로 만들고 rank를 1 더한다.
 - height와 달리 rank가 업데이트되지 않는 경우:
-    - root가 아닌 node는 rank를 업데이트하지 않는다.
-    - [Path compression](#path-compression) 과정에서 height가 변해도 rank를
+  - root가 아닌 node는 rank를 업데이트하지 않는다.
+  - [Path compression](#path-compression) 과정에서 height가 변해도 rank를
     업데이트하지 않는다.
-
 
 ### 경로 압축(Path compression)
 
 `find` 연산 과정에서 트리를 평탄화(flatten)하는 작업을 같이 수행한다. `find(x)`
 호출 시, x와 그 조상들을 한 번에 root로 직접 연결한다. 알고리즘의 설명은
-후술한다. 
+후술한다.
 
 ## 의사코드
 
@@ -88,7 +89,6 @@ function union(x, y)
         root_x.parent := root_y
         if root_x.rank == root_y.rank
             root_y.rank := root_y.rank + 1
-    
 ```
 
 다음은 `find(x)`의 의사코드다. Path compression을 적용하지 않았다.
@@ -119,7 +119,7 @@ function find(x)
     root := x
     while root.parent ≠ root
         root := root.parent
-    
+
     while x.parent ≠ root
         parent := x.parent
         x.parent := root
@@ -157,7 +157,6 @@ Path splitting은 경로상 모든 부모 노드를 조부모로 연결한다. P
 노드가 아니라 두 번째마다 부모를 조부모로 연결한다. path splitting이 더
 공격적으로 경로를 압축하나, 구현이 아주 조금 더 복잡하고 성능 차이는 거의 없다.
 따라서 path halving 또한 선호된다.
-
 
 ## 참조
 

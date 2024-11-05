@@ -12,9 +12,10 @@ FreeBSD의 VNET Jail이 무엇인지, 어디에 쓰는지 소개한다. 구성 �
 BSD 계열 운영체제는 **Jail** 기능이 있는데, 프로세스, 파일 시스템, 네트워크,
 사용자 및 권한을 격리하는 환경을 제공한다.
 
-흔히 Linux의 **Docker**와 비교되지만, Docker와 달리 Jail은 운영체제의 커널 레벨에서
-지원하는 기능이다. 따라서 운영체제와 밀접히 통합되어 있으며, 보안 및 안정성,
-자원 관리, 네트워크 분리, ZFS 파일 시스템과의 상성과 같은 강력한 장점이 있다.
+흔히 Linux의 **Docker**와 비교되지만, Docker와 달리 Jail은 운영체제의 커널
+레벨에서 지원하는 기능이다. 따라서 운영체제와 밀접히 통합되어 있으며, 보안 및
+안정성, 자원 관리, 네트워크 분리, ZFS 파일 시스템과의 상성과 같은 강력한 장점이
+있다.
 
 사실, 요즘의 Docker는 개발 편의를 위한 도구로써 의미가 있다고 본다. Docker
 이미지의 생성 및 레포지토리를 통한 배포 등 개발 환경의 구축을 간소화하고 편의를
@@ -36,7 +37,7 @@ Jail 또한 Docker의 편의성에는 못 미친다. 다만 Docker는 개발 도
 > separate network stack for processes within the jail, ensuring that network
 > traffic within the jail is isolated from the host system and other jails.
 > \
-> – [FreeBSD Handbook][handbook-vnet], **17.2.4. VNET Jails.** 
+> – [FreeBSD Handbook][handbook-vnet], **17.2.4. VNET Jails.**
 
 [handbook-vnet]: https://docs.freebsd.org/en/books/handbook/jails/#vnet-jails
 
@@ -54,8 +55,8 @@ Jail 또한 Docker의 편의성에는 못 미친다. 다만 Docker는 개발 도
 특징을 갖는다.
 
 1. **네트워크 인터페이스가 호스트와 다르다.** 따라서 호스트와 다른 서브넷의
-   ip를 할당받을 수 있다. Non-VNET Jail는 ip aliasing을 이용하여 호스트와
-   같은 서브넷 내에서만 ip를 할당받는다.
+   ip를 할당받을 수 있다. Non-VNET Jail는 ip aliasing을 이용하여 호스트와 같은
+   서브넷 내에서만 ip를 할당받는다.
 2. **라우팅 테이블이 호스트와 분리된다.** Non-VNET Jail에서는 policy-based
    routing으로 라우팅을 분리할 수 있지만, VNET Jail에서는 호스트와 동등한
    별개의 머신처럼 라우팅을 관리할 수 있다.
@@ -64,8 +65,8 @@ Jail 또한 Docker의 편의성에는 못 미친다. 다만 Docker는 개발 도
    규칙을 적용할 수 있다.
 4. **관리 측면에서 호스트와 결합도가 낮아 관리가 용이하다.** 위에서 언급한
    policy-based routing와 같이 non-VNET Jail에서도 동일한 목적을 달성할 수는
-   있어도, VNET Jail은 각 Jail을 호스트와 동등한 별개의 머신처럼 관리할 수 있기에
-   일종의 모듈화와 같은 효과가 있다.
+   있어도, VNET Jail은 각 Jail을 호스트와 동등한 별개의 머신처럼 관리할 수
+   있기에 일종의 모듈화와 같은 효과가 있다.
 
 ### VNET Jail의 활용
 
@@ -115,10 +116,10 @@ my-vnet-jail {
   vnet.interface = "${epair}b";
 
 # NETWORKS/INTERFACES
-  $id = "154"; 
+  $id = "154";
   $ip = "192.168.1.${id}/24";
   $gateway = "192.168.1.1";
-  $bridge = "bridge0"; 
+  $bridge = "bridge0";
   $epair = "epair${id}";
 
 # ADD TO bridge INTERFACE
@@ -145,32 +146,34 @@ my-vnet-jail {
 `vnet.interface`의 인수로 설정한 인터페이스는 자동으로 release되어야
 한다.[^manpage-jail]
 
-[^notation-remove]: Jail의 **생성(create)/제거(remove)**라는 표현은 Jail을
+[^notation-remove]:
+    Jail의 **생성(create)/제거(remove)**라는 표현은 Jail을
     구성하는 **userland**의 생성/제거와 독립적이므로 주의해야 한다. Docker에
-익숙한 경우, Jail의 생성/제거는 Docker 컨테이너의 생성(create)/제거(rm)보다는
-**시작(start)/정지(stop)**와 더 비슷하다고 이해할 수 있다.
+    익숙한 경우, Jail의 생성/제거는 Docker 컨테이너의
+    생성(create)/제거(rm)보다는 **시작(start)/정지(stop)**와 더 비슷하다고
+    이해할 수 있다.
 
 [^not-releasing-if]: 해당 문제 보고는 [FreeBSD 포럼][forum-1] 참조.
 
 [^manpage-jail-conf]: `man 5 jail.conf` 참조.
 
-[^manpage-jail]: `man 8 jail` 참조:
-```
-vnet.interface
-        A network interface to give to a vnet-enabled jail after is it
-        created.  The interface will automatically be released when the
-        jail is removed.
-```
+[^manpage-jail]:
+    `man 8 jail` 참조:
 
+    ```
+    vnet.interface
+            A network interface to give to a vnet-enabled jail after is it
+            created.  The interface will automatically be released when the
+            jail is removed.
+    ```
 
 [forum-1]: https://forums.FreeBSD.org/threads/interface-does-not-return-to-host-after-kill-jail.92730/post-648334
 
 #### 해결 방법
 
 Jail이 제거되는 시점에 호스트에서 `ifconfig -vnet` 명령어로 수동으로
-인터페이스를 release해줄 수 있다. `jail.conf`의 `exec.prestop` 인수에
-다음과 같이 명령어를 추가하면 된다.
-
+인터페이스를 release해줄 수 있다. `jail.conf`의 `exec.prestop` 인수에 다음과
+같이 명령어를 추가하면 된다.
 
 ```unix
 my-vnet-jail {
@@ -192,25 +195,24 @@ my-vnet-jail {
 ```
 
 - `exec.stop`은 Jail 제거 시점에 Jail 내부에서 실행된다.
-- `exec.prestop`과 `exec.poststop`은 각각 Jail 제거 직전과 직후에
-호스트에서 실행된다.
+- `exec.prestop`과 `exec.poststop`은 각각 Jail 제거 직전과 직후에 호스트에서
+  실행된다.
 
 ## Jail 구축 관련 참고 사항
 
 ### DHCP를 이용한 IP 할당
 
 위에서 소개한 방법은 각 Jail의 IP를 수동으로 할당한다. DHCP를 이용하여 자동
-할당받고자 하는 경우, 각 Jail에서 DHCP 클라이언트를 따로 구성해줘야 한다.
-또한 `jail.conf`에서 각 Jail에 대해 permission을 추가로 부여할 필요가 있던
-것으로 기억하는데, 정확한 방법은 기억나지 않는다.
+할당받고자 하는 경우, 각 Jail에서 DHCP 클라이언트를 따로 구성해줘야 한다. 또한
+`jail.conf`에서 각 Jail에 대해 permission을 추가로 부여할 필요가 있던 것으로
+기억하는데, 정확한 방법은 기억나지 않는다.
 
 ### PostgreSQL 등 DB 구축
 
 VNET Jail과 관련은 없으나, PostgreSQL과 같은 일부 데이터베이스[^other-dbs]를
-Jail에서
-정상적으로 구동하기 위해서는 해당 Jail에 별도의 제약을 해제해야 한다. Jail을
-소개할 때 언급했듯이, Jail은 각각 자원의 할당 및 권한 관리를 세세히 설정할 수
-있다.
+Jail에서 정상적으로 구동하기 위해서는 해당 Jail에 별도의 제약을 해제해야 한다.
+Jail을 소개할 때 언급했듯이, Jail은 각각 자원의 할당 및 권한 관리를 세세히
+설정할 수 있다.
 
 PostgreSQL의 경우, `sysvipc`[^manpage-jail-2] 제약을 해제해야 한다. `jail.conf`
 파일에 다음과 같이 추가한다.
@@ -224,16 +226,18 @@ my-postgres-jail {
 }
 ```
 
-
-[^other-dbs]: 경량의 파일 기반 데이터베이스인 SQLite는 따로 권한을 요구하지
+[^other-dbs]:
+    경량의 파일 기반 데이터베이스인 SQLite는 따로 권한을 요구하지
     않았다.
 
-[^manpage-jail-2]: `man 8 jail` 참조:
-```
-allow.sysvipc
-        A process within the jail has access to System V IPC
-        primitives.  This is deprecated in favor of the per-
-        module parameters (see below).  When this parameter is
-        set, it is equivalent to setting sysvmsg, sysvsem, and
-        sysvshm all to “inherit”.
-```
+[^manpage-jail-2]:
+    `man 8 jail` 참조:
+
+    ```
+    allow.sysvipc
+            A process within the jail has access to System V IPC
+            primitives.  This is deprecated in favor of the per-
+            module parameters (see below).  When this parameter is
+            set, it is equivalent to setting sysvmsg, sysvsem, and
+            sysvshm all to “inherit”.
+    ```
