@@ -1,16 +1,16 @@
 const commentsContainer = document.querySelector(".comments");
 if (commentsContainer) {
   let loadingTimeout = 0;
-  let loadingIndicator = document.createElement("div");
+  let loadingIndicator = document.createElement("p");
   commentsContainer.appendChild(loadingIndicator);
 
   const intersectionObserver = new IntersectionObserver((entries, observer) => {
     if (entries[0].isIntersecting) {
-      loadingIndicator.innerHTML = "<span>댓글을 로딩중입니다...</span>";
+      loadingIndicator.innerText = "댓글을 로딩중입니다...";
       loadingTimeout = setTimeout(() => {
-        loadingIndicator.innerHTML =
-          "<span>문제가 발생했습니다. 페이지를 새로고침 해주세요.</span>";
-      }, 1000 * 5);
+        loadingIndicator.innerText =
+          "댓글을 로딩하는 중 문제가 발생했습니다. 페이지를 새로고침 해주세요.";
+      }, 1000 * 7);
       observer.disconnect();
     }
   });
@@ -21,6 +21,7 @@ if (commentsContainer) {
       if (mutation.target.classList.contains("utterances")) {
         clearTimeout(loadingTimeout);
         loadingIndicator.remove();
+        intersectionObserver.disconnect();
         observer.disconnect();
       }
     });
