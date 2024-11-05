@@ -56,8 +56,22 @@ p {
   margin-block-end: 0.5em;
 }
 
+.article-body {
+  margin-block-end: 6rem;
+}
+
+.footnotes {
+  margin-block-start: 6rem;
+  margin-block-end: -4rem;
+}
+
 .footnotes > hr {
-  margin-block-start: 4.5em;
+  margin-block-end: 2rem;
+}
+
+.comments > hr {
+  margin-block-start: 2rem;
+  margin-block-end: 6rem;
 }
 
 table {
