@@ -14,12 +14,19 @@ title: About
 
 아래는 제 소셜 링크입니다.
 
-<div class="social-links"> <a href="https://github.com/kimminss0"> <img
-    src="/images/github.svg" alt="GitHub" /> </a> <a
-        href="https://www.linkedin.com/in/minseo-kim-639304298/"> <img
-            src="/images/linkedin.svg" alt="Linkedin" /> </a> <a
-        href="https://www.instagram.com/kimminss0"> <img
-            src="/images/instagram.svg" alt="Instagram" /> </a> </div>
+```{=html}
+<div class="social-links">
+    <a href="https://github.com/kimminss0">
+        <img src="/images/github.svg" alt="GitHub" />
+    </a>
+    <a href="https://www.linkedin.com/in/minseo-kim-639304298/">
+        <img src="/images/linkedin.svg" alt="Linkedin" />
+    </a>
+    <a href="https://www.instagram.com/kimminss0">
+        <img src="/images/instagram.svg" alt="Instagram" />
+    </a>
+</div>
+```
 
 이 블로그는 Haskell로 작성된 정적 웹사이트 생성기 [Hakyll]로 컴파일 되었습니다.
 블로그의 소스코드를 [GitHub][source-code]에서 확인할 수 있습니다.
