@@ -33,7 +33,8 @@ main = hakyll $ do
     route $ setExtension "html" `composeRoutes` appendIndex `composeRoutes` slugToPath
 
     compile $
-      pandocCustomCompiler
+      getResourceString
+        >>= renderPandocCustom
         >>= loadAndApplyTemplate "templates/post.html" postCtx
         >>= loadAndApplyTemplate "templates/default.html" postCtx
         >>= relativizeUrls
@@ -143,14 +144,17 @@ getItemZonedTime key zone locale id' = do
         "%Y-%m-%dT%H:%M:%S"
       ]
 
+renderPandocCustom :: Item String -> Compiler (Item String)
+renderPandocCustom =
+  let readerOpts = defaultHakyllReaderOptions
+      writerOpts =
+        defaultHakyllWriterOptions
+          { writerHTMLMathMethod = MathJax ""
+          }
+   in renderPandocWith readerOpts writerOpts
+
 pandocCustomCompiler :: Compiler (Item String)
-pandocCustomCompiler = pandocCompilerWith readerOpts writerOpts
-  where
-    readerOpts = defaultHakyllReaderOptions
-    writerOpts =
-      defaultHakyllWriterOptions
-        { writerHTMLMathMethod = MathJax ""
-        }
+pandocCustomCompiler = getResourceBody >>= renderPandocCustom
 
 slugToPath :: Routes
 slugToPath =

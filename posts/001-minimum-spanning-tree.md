@@ -2,6 +2,8 @@
 title: 최소신장트리(Minimum spanning tree, MST)
 published: 2024-09-13T17:00:00+09:00
 katex: on
+header-includes: |
+  \newcommand{\abs}[1]{\left| #1 \right|}
 ---
 
 > PS(Problem Solving) 문제 풀이를 위해 작성한 글입니다. 이론적인 설명은
@@ -35,8 +37,8 @@ subgraph 중 weight의 합이 최소인 트리**이다. 즉, MST는 그래프의
 
 | 알고리즘 |  사용 환경  |        시간 복잡도         |
 |----------|-------------|----------------------------|
-| Kruskal  | 희소 그래프 |$\text{O}(|E|\log{|E|})$    |
-| Prim     | 밀집 그래프 |$\text{O}(|E|\log{|V|})$[^1]|
+| Kruskal  | 희소 그래프 |$\text{O}(\abs{E}\log{\abs{E}})$    |
+| Prim     | 밀집 그래프 |$\text{O}(\abs{E}\log{\abs{V}})$[^1]|
 
 [^1]: binary heap으로 구현 시
 
