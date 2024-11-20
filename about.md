@@ -32,13 +32,10 @@ title: About
 블로그의 소스코드를 [GitHub][source-code]에서 확인할 수 있습니다.
 
 [CV]: https://github.com/kimminss0/CV/blob/main/main.pdf
-[dotfiles]: https://github.com/kimminss0/dotfiles
-[Vim]: https://www.vim.org
 [Neovim]: https://neovim.io
 [Haskell]: https://www.haskell.org
 [FreeBSD]: https://www.freebsd.org
 [Hakyll]: https://jaspervdj.be/hakyll
-[KaTeX]: https://katex.org
 [source-code]: https://github.com/kimminss0/minseo-kim.net
 
 ## Contact
