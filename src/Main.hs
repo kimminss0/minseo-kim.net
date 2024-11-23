@@ -6,6 +6,8 @@ import Data.Time.Clock
 import Data.Time.Format
 import Hakyll
 import System.FilePath
+import System.IO.Silently (silence)
+import System.Process (CreateProcess (cwd), createProcess, proc, waitForProcess)
 import Text.Pandoc.Options
 
 main :: IO ()
@@ -14,9 +16,13 @@ main = hakyll $ do
     route $ gsubRoute "static/" (const "")
     compile copyFileCompiler
 
-  match "images/**" $ do
+  match ("images/**" .&&. complement "images/**.tex") $ do
     route idRoute
     compile copyFileCompiler
+
+  match "images/**.tex" $ do
+    route $ setExtension "png"
+    compile $ getResourceString >>= lualatex
 
   match "css/*" $ do
     route idRoute
@@ -160,3 +166,21 @@ slugToPath =
   gsubRoute "/[0-9]*-" $
     replaceAll "-" (const "/")
       . replaceAll "/0*" (const "/")
+
+lualatex :: Item String -> Compiler (Item TmpFile)
+lualatex item = do
+  TmpFile texPath <- newTmpFile "lualatex/main.tex"
+  let tmpDir = takeDirectory texPath
+      texFile = takeFileName texPath
+      pngPath = replaceExtension texPath "png"
+
+  unsafeCompiler $ do
+    writeFile texPath (itemBody item)
+    (_, _, _, handle) <-
+      silence $
+        createProcess
+          (proc "lualatex" ["-halt-on-error", "-shell-escape", texFile]) {cwd = Just tmpDir}
+    _ <- waitForProcess handle
+    return ()
+
+  makeItem $ TmpFile pngPath
