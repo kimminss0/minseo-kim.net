@@ -1,7 +1,7 @@
 cabal-version:      >= 1.10
 name:               blog
 version:            0.1.0.0
--- description:
+description:        Minseo Kim's personal blog
 
 homepage:           https://github.com/kimminss0/minseo-kim.net#readme
 license:            MIT
