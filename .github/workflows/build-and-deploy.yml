@@ -18,6 +18,31 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install \
+            texlive \
+            texlive-latex-extra \
+            texlive-luatex \
+            imagemagick \
+            ghostscript
+          echo <<EOF | sudo tee /etc/ImageMagick-6/policy.xml
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE policymap [
+            <!ELEMENT policymap (policy)*>
+            <!ATTLIST policymap xmlns CDATA #FIXED ''>
+            <!ELEMENT policy EMPTY>
+            <!ATTLIST policy xmlns CDATA #FIXED '' domain NMTOKEN #REQUIRED
+              name NMTOKEN #IMPLIED pattern CDATA #IMPLIED rights NMTOKEN #IMPLIED
+              stealth NMTOKEN #IMPLIED value CDATA #IMPLIED>
+          ]>
+          <policymap>
+            <policy domain="Undefined" rights="none"/>
+          </policymap>
+          EOF
+
+
       - uses: haskell-actions/setup@v2
         id: setup
         with:
