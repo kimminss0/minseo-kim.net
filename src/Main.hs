@@ -14,7 +14,7 @@ main = hakyll $ do
     route $ gsubRoute "static/" (const "")
     compile copyFileCompiler
 
-  match ("images/*" .||. "js/*") $ do
+  match "images/**" $ do
     route idRoute
     compile copyFileCompiler
 
@@ -31,7 +31,6 @@ main = hakyll $ do
 
   match "posts/*" $ do
     route $ setExtension "html" `composeRoutes` appendIndex `composeRoutes` slugToPath
-
     compile $
       getResourceString
         >>= renderPandocCustom
