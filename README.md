@@ -6,7 +6,10 @@ Personal website built with [Hakyll](https://jaspervdj.be/hakyll/), a static sit
 
 ### Prerequisites
 
-Make sure you have Cabal installed. It is recommended to use GHCup for installation.
+- `cabal`: It is recommended to use GHCup for installation.
+- `imagemagick`: Required to convert LaTeX to PNG
+- `ghostscript`: Required to convert LaTeX to PNG
+- `texlive`: Required to convert LaTeX to PNG
 
 ### Build Steps
 
