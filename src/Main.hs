@@ -48,8 +48,8 @@ main = hakyll $ do
       posts <- recentFirst =<< loadAll "posts/*"
       let archiveCtx =
             listField "posts" postCtx (return posts)
-              `mappend` constField "title" "Posts"
-              `mappend` defaultContext
+              <> constField "title" "Posts"
+              <> defaultContext
 
       makeItem ""
         >>= loadAndApplyTemplate "templates/posts.html" archiveCtx
@@ -61,7 +61,7 @@ main = hakyll $ do
       posts <- recentFirst =<< loadAll "posts/*"
       let sitemapCtx =
             listField "posts" postCtx (return posts)
-              `mappend` defaultContext
+              <> defaultContext
 
       makeItem ""
         >>= loadAndApplyTemplate "templates/sitemap.xml" sitemapCtx
@@ -78,7 +78,7 @@ main = hakyll $ do
       posts <- recentFirst =<< loadAll "posts/*"
       let indexCtx =
             listField "posts" postCtx (return posts)
-              `mappend` defaultContext
+              <> defaultContext
 
       getResourceBody
         >>= applyAsTemplate indexCtx
@@ -101,11 +101,11 @@ dropIndexHtml key = mapContext transform (urlField key)
 postCtx :: Context String
 postCtx =
   dateFieldWithZone zone "date" "%F"
-    `mappend` dateFieldWithZone zone "datetime" "%Y-%m-%dT%H:%M:%S%Ez"
-    `mappend` updateFieldWithZone zone "lastmodDate" "%F"
-    `mappend` updateFieldWithZone zone "lastmodDatetime" "%Y-%m-%dT%H:%M:%S%Ez"
-    `mappend` dropIndexHtml "url"
-    `mappend` defaultContext
+    <> dateFieldWithZone zone "datetime" "%Y-%m-%dT%H:%M:%S%Ez"
+    <> updateFieldWithZone zone "lastmodDate" "%F"
+    <> updateFieldWithZone zone "lastmodDatetime" "%Y-%m-%dT%H:%M:%S%Ez"
+    <> dropIndexHtml "url"
+    <> defaultContext
   where
     zone = DT.TimeZone (9 * 60) False "KST"
 
