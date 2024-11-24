@@ -33,7 +33,6 @@ main = hakyll $ do
     compile $
       pandocCustomCompiler
         >>= loadAndApplyTemplate "templates/default.html" defaultContext
-        >>= relativizeUrls
 
   match "posts/*" $ do
     route $ setExtension "html" `composeRoutes` appendIndex `composeRoutes` slugToPath
@@ -42,7 +41,6 @@ main = hakyll $ do
         >>= renderPandocCustom
         >>= loadAndApplyTemplate "templates/post.html" postCtx
         >>= loadAndApplyTemplate "templates/default.html" postCtx
-        >>= relativizeUrls
 
   create ["posts.html"] $ do
     route $ idRoute `composeRoutes` appendIndex
@@ -56,7 +54,6 @@ main = hakyll $ do
       makeItem ""
         >>= loadAndApplyTemplate "templates/posts.html" archiveCtx
         >>= loadAndApplyTemplate "templates/default.html" archiveCtx
-        >>= relativizeUrls
 
   create ["sitemap.xml"] $ do
     route idRoute
@@ -86,7 +83,6 @@ main = hakyll $ do
       getResourceBody
         >>= applyAsTemplate indexCtx
         >>= loadAndApplyTemplate "templates/default.html" indexCtx
-        >>= relativizeUrls
 
   match "templates/*" $ compile templateBodyCompiler
 
