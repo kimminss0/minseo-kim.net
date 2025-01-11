@@ -3,25 +3,25 @@
   font-family: "Meslo LG M DZ";
   font-style: normal;
   font-weight: normal;
-  src: url("/fonts/MesloLGMDZ-Regular.ttf") format("truetype");
+  src: url("/fonts/MesloLGMDZ-Regular.woff2") format("woff2");
 }
 @font-face {
   font-family: "Meslo LG M DZ";
   font-style: italic;
   font-weight: normal;
-  src: url("/fonts/MesloLGMDZ-Italic.ttf") format("truetype");
+  src: url("/fonts/MesloLGMDZ-Italic.woff2") format("woff2");
 }
 @font-face {
   font-family: "Meslo LG M DZ";
   font-style: normal;
   font-weight: bold;
-  src: url("/fonts/MesloLGMDZ-Bold.ttf") format("truetype");
+  src: url("/fonts/MesloLGMDZ-Bold.woff2") format("woff2");
 }
 @font-face {
   font-family: "Meslo LG M DZ";
   font-style: italic;
   font-weight: bold;
-  src: url("/fonts/MesloLGMDZ-BoldItalic.ttf") format("truetype");
+  src: url("/fonts/MesloLGMDZ-BoldItalic.woff2") format("woff2");
 }
 
 html {
