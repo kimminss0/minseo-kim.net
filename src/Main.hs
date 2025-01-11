@@ -12,7 +12,7 @@ import Text.Pandoc.Options
 
 main :: IO ()
 main = hakyll $ do
-  match "static/*" $ do
+  match "static/**" $ do
     route $ gsubRoute "static/" (const "")
     compile copyFileCompiler
 

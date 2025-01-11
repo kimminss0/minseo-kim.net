@@ -1,4 +1,28 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap");
+@font-face {
+  font-family: "Meslo LG M DZ";
+  font-style: normal;
+  font-weight: normal;
+  src: url("/fonts/MesloLGMDZ-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Meslo LG M DZ";
+  font-style: italic;
+  font-weight: normal;
+  src: url("/fonts/MesloLGMDZ-Italic.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Meslo LG M DZ";
+  font-style: normal;
+  font-weight: bold;
+  src: url("/fonts/MesloLGMDZ-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Meslo LG M DZ";
+  font-style: italic;
+  font-weight: bold;
+  src: url("/fonts/MesloLGMDZ-BoldItalic.ttf") format("truetype");
+}
 
 html {
   font-size: 62.5%;
@@ -105,7 +129,6 @@ article .header {
 
 code {
   font-size: 95%;
-  font-family: Menlo, Monaco, Consolas, "Lucida Console", monospace;
   margin: 0;
   hyphens: manual;
 }
@@ -113,6 +136,10 @@ pre {
   margin: 1em 0;
   padding: 8px 15px;
   overflow: auto;
+}
+pre,
+code {
+  font-family: "Meslo LG M DZ", monospace;
 }
 pre code {
   padding: 0;
