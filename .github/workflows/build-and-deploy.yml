@@ -134,9 +134,9 @@ jobs:
           script: |
             cd /home/${{ env.VPS_USERNAME }}
             dir=$(mktemp -d /tmp/${{ env.VPS_USERNAME }}.XXXXXX)
-            trap 'sudo rm -rf $dir' EXIT
+            trap 'doas rm -rf $dir' EXIT
             tar -xJf bundle.tar.xz -C $dir
-            sudo chown -R www:www $dir
+            doas chown -R www:www $dir
             # do not preserve time
-            sudo rsync --checksum --delete -rlpgoDvh $dir/ ${{ env.VPS_WWW_DIR }}/
+            doas rsync --checksum --delete -rlpgoDvh $dir/ ${{ env.VPS_WWW_DIR }}/
             rm bundle.tar.xz
